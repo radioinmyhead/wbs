@@ -15,7 +15,7 @@ This tool is yet another auto-rebuild-reloader for go net/http. This tool uses f
 ## Installation
 
 ```
-go get -u github.com/achiku/wbs
+go get -u github.com/radioinmyhead/wbs
 ```
 
 
