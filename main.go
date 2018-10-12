@@ -68,7 +68,7 @@ func main() {
 		for {
 			select {
 			case event := <-watcher.w.Events:
-				if event.Op&fsnotify.Write == fsnotify.Write {
+				if check(event.Op) {
 					e := event.String()
 					mainLogger(fmt.Sprintf("file modified: %s", e))
 					if config.RestartProcess {
@@ -83,4 +83,14 @@ func main() {
 		}
 	}()
 	<-done
+}
+
+func check(op fsnotify.Op) bool {
+	if op&fsnotify.Write == fsnotify.Write {
+		return true
+	}
+	if op&fsnotify.Remove == fsnotify.Remove {
+		return true
+	}
+	return false
 }
